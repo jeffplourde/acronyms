@@ -20,7 +20,7 @@
                 <tr>
                     <td><%=data[i].acronym%></td>
                     <td><%=data[i].meaning%></td>
-                    <td><a href="<%=data[i].url%>">Link</a></td>
+                    <td><% if(data[i].url) { %><a target="_blank" href="<%=data[i].url%>"><%=data[i].url%></a><% } %></td>
                     <td>
                         <a class="a-inside edit" href="../acronyms/edit/<%=data[i].id%>">Edit</a>
                        
