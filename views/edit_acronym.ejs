@@ -1,0 +1,31 @@
+<%- include layouts/header.ejs %>
+
+        <div class="page-data">
+            
+            <form method="post" action="/acronyms/edit/<%=data[0].id%>">
+                <table cellpadding="11">
+                <tr>
+                    <td class="label">Name</td><td>: <input type="text" name="acronym" value="<%=data[0].acronym%>" required></td>
+                 </tr>
+                 <tr>
+                    <td class="label" valign="top">Meaning</td>
+                    <td valign="top">: 
+                        <textarea name="meaning" required cols="30" rows="5"><%=data[0].meaning%></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label">URL</td><td>: <input type="text" value="<%=data[0].url%>" name="url" required></td>
+                 </tr>
+                 <tr>
+                    <td class="label"></td>
+                    <td>
+                        &nbsp; <input type="submit" name="submit" value="Save">
+                       <input type="button" name="cancel" value="Cancel" class="cancel" onClick="cancelAdd()">
+                    </td>
+                 </tr>
+                </table>
+            </form>
+            
+        </div>
+        
+<%- include layouts/footer.ejs %>

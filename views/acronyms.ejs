@@ -1,0 +1,45 @@
+<%- include layouts/header.ejs %>
+
+        <div class="page-data">
+         <div class="data-btn">
+           <button onClick="addAcronym();">+ Add</button>
+         </div>
+         <div class="data-table">
+            <table border="1" cellpadding="7" cellspacing="7">
+                <tr>
+                    <th>Acronym</th>
+                    <th>Meaning</th>
+                    <th>URL</th>
+                    <th width="120px">Action</th>
+                </tr>
+                               
+                <% if(data.length){ 
+                                
+                 for(var i = 0;i < data.length;i++) { %>
+                 
+                <tr>
+                    <td><%=data[i].acronym%></td>
+                    <td><%=data[i].meaning%></td>
+                    <td><a href="<%=data[i].url%>">Link</a></td>
+                    <td>
+                        <a class="a-inside edit" href="../acronyms/edit/<%=data[i].id%>">Edit</a>
+                       
+                        <a class="a-inside delete" href="../acronyms/delete/<%=data[i].id%>">Delete</a>
+                       
+                    </td>
+                </tr>
+            <% }
+            
+             }else{ %>
+                 <tr>
+                    <td colspan="3">No acronym</td>
+                 </tr>
+            <% } %>
+                
+                              
+                
+            </table>
+         </div>
+        </div>
+        
+<%- include layouts/footer.ejs %>
