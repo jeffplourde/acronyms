@@ -1,10 +1,9 @@
 body {
   margin:0;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background:#eee;
-  width:100%;
-  height:100%;
+  background:#fff;
 }
+
 *{
 
     border-radius:0px;
@@ -13,18 +12,7 @@ a {
   color: #00B7FF;
 }
 
-#wrapper{
-    
-    margin-top:30px;
-    width:90%;
-    min-height:600px;
-    margin-left:5%;
-    border:1px solid #ddd;
-    background:#fff;
-   
-}
-
-.page-container{padding:20px;}
+.page-container{padding:10px;}
 .page-data{padding:10px;}
 .page-header{
     
@@ -39,7 +27,7 @@ a {
 }
 
 .data-table{padding-left:10px;}
-.data-table table{border-collapse:collapse;border:1px solid #ddd;width:100%}
+.data-table table{border-collapse:collapse;border:1px solid #ddd;}
 .a-inside{padding:4px 10px;border:1px solid #fff;text-decoration:none;}
 .a-inside.edit{background-color:#00CC00;color:#fff;}
 .a-inside.delete{background-color:#D23641;color:#fff;}
