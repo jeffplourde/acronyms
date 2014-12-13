@@ -13,7 +13,7 @@ exports.list = function(req, res){
             if(err)
                 console.log("Error Selecting : %s ",err );
      
-            res.render('acronyms',{page_title:"Acronyms - Node.js",data:rows});
+            res.render('acronyms',{page_title:"Acronyms",data:rows});
                 
            
          });
@@ -39,7 +39,7 @@ exports.edit = function(req, res){
             if(err)
                 console.log("Error Selecting : %s ",err );
 
-            res.render('edit_acronym',{page_title:"Edit Acronym - Node.js",data:rows});
+            res.render('edit_acronym',{page_title:"Edit Acronym",data:rows});
                 
            
          });
