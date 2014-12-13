@@ -44,7 +44,7 @@ function nocache(req, res, next) {
   next();
 }
 
-app.get('/', routes.index);
+app.get('/', function(req, res) { res.redirect(302, '/acronyms'); });
 app.get('/acronyms', nocache, acronyms.list);
 app.get('/acronyms/add', nocache, acronyms.add);
 app.post('/acronyms/add', nocache, acronyms.save);
