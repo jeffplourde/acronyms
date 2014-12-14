@@ -1,0 +1,64 @@
+<head>
+  <title>MD PnP Acronyms</title>
+</head>
+
+<body>
+    <header>
+      <h1>MD PnP Acronyms</h1>
+      <i class="icon-search"></i>&nbsp;<input type="text" name="prefix" class="prefix" placeholder="Type to search"/>
+    </header>
+    <ul>
+      {{#each acronyms}}
+        {{> acronym}}
+      {{/each}}
+      <li>
+        <form class="new-acronym">
+          <i class="icon-plus"></i>&nbsp;<input type="text" name="acronym" placeholder="Type to add new acronym"/>
+        </form>
+      </li>
+    </ul>
+</body>
+
+<template name="acronym">
+  <li>
+  {{#if unlocked}}
+    <button type="button" class="delete" title="Delete">
+    <i class="icon-trash"></i>
+    </button>
+  {{/if}}
+  {{#if editing}}
+     <form class="update-acronym">
+     <button type="submit" class="update" title="Save Changes">
+     <i class="icon-ok"></i>
+     </button>
+     <button type="button" class="cancel" title="Discard Changes">
+     <i class="icon-remove"></i>
+     </button>
+     <label for="acronym">Acronym</label>
+     <input class="acronym-text" id="acronym" type="text" name="acronym" value="{{acronym}}"/>
+     <label>Meaning</label>
+     <input class="meaning-text" type="text" name="meaning" value="{{meaning}}"/>
+     <label>Web Address</label>
+     <input class="url-text" type="text" name="url" value="{{url}}"/>
+     </form>
+  {{else}}
+     <span class="acronym">{{acronym}}</span>
+     <span class="meaning">
+        {{#if hasUrl}}
+          <a href="{{url}}" target="_blank">{{meaning}}</a>
+        {{else}}
+          {{meaning}}
+        {{/if}}
+     </span>
+     {{#if unlocked}}
+       <button type="button" class="edit" title="Edit">
+       <i class="icon-edit"></i>
+       </button>
+     {{else}}
+       <button type="button" class="unlock" title="Locked. Click to override">
+        <i class="icon-lock"></i>
+       </button>
+     {{/if}}
+  {{/if}}
+  </li>
+</template>
