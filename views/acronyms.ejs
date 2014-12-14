@@ -5,7 +5,7 @@
            <button onClick="addAcronym();">+ Add</button>
          </div>
          <div class="data-table">
-            <table border="1" cellpadding="7" cellspacing="7">
+            <table id="alldata" border="1" cellpadding="7" cellspacing="7">
                 <tr>
                     <th>Acronym</th>
                     <th>Meaning</th>
@@ -13,31 +13,32 @@
                 </tr>
                                
                 <% if(data.length){ 
-                                
-                 for(var i = 0;i < data.length;i++) { %>
-                 
-                <tr>
-                    <td><%=data[i].acronym%></td>
-                    <td><% if(data[i].url) { %><a target="_blank" href="<%=data[i].url%>"><%=data[i].meaning%></a><% } else { %><%=data[i].meaning%><% } %></td>
-                    <td>
-                        <a class="a-inside edit" href="../acronyms/edit/<%=data[i].id%>">Edit</a>
-                       
-                        <a class="a-inside delete" href="../acronyms/delete/<%=data[i].id%>">Delete</a>
-                       
-                    </td>
-                </tr>
-            <% }
-            
-             }else{ %>
-                 <tr>
-                    <td colspan="4">No acronym</td>
-                 </tr>
-            <% } %>
-                
-                              
-                
+                   data.forEach(function(data) { %>
+                <%- include acronym.ejs %>
+            <% }); } %>
             </table>
          </div>
         </div>
-        
+        <script>
+          var url = window.location.protocol+'//'+window.location.host;
+          
+        var s = new io(url, {path: '/acronyms/socket.io'});
+        var template = new EJS({url: '/acronyms/views/acronym.ejs'})
+        function doit() {
+
+            s.emit('data', "HELLO WORLD");
+
+        }
+        s.on('data', function(msg) { 
+            msg.forEach(function(row) {
+                if($("#"+row.id)[0]) {
+                    $("#"+row.id).remove();
+                }
+                
+                $("#alldata").append(template.render({data:row}));
+            });
+        });
+
+        </script>
+        <a href="javascript:doit();">CLICK</a>
 <%- include layouts/footer.ejs %>
