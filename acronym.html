@@ -5,6 +5,7 @@
 <body>
     <div class="header">
     <header >
+      <div class="status">{{#if isConnected}}Connected{{else}}Disconnected{{/if}}</div>
       <h1>MD PnP Acronyms</h1>
       {{> loginButtons}}<br/>
       <i class="glyphicon glyphicon-search"></i>&nbsp;<input type="text" name="prefix" class="prefix" placeholder="Type to search"/>

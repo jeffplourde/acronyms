@@ -10,6 +10,9 @@ if (Meteor.isClient) {
       } else {
         return Acronyms.find({active:true}, {sort: {acronym: 1}});
       }
+    },
+    isConnected: function() {
+      return Meteor.status().connected;
     }
   });
   Template.acronym.created = function() {

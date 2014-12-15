@@ -1,11 +1,15 @@
 /* CSS declarations go here */
 body {
   height:100%;
-  margin-left:5px;
+  margin:0;
+  width:100%;
+  overflow:hidden;
+  padding:5px;
 }
 
 
 .content {
+  margin:0;
   margin-bottom:80px;
   overflow:hidden;
   overflow-y:scroll;
@@ -13,23 +17,33 @@ body {
   top: 120px;
   left:5px;
   height: 80%;
+  width:100%;
 }
-
+.status {
+  position:absolute;
+  right:0;
+  top:0;
+  padding-right:10px;
+}
 .acronym {
   font-weight:bold;
 }
 .header {
   height:120px;
   position: absolute;
-  top: 0;
-  left: 5px;
+  top:0;
+  left:0;
   width:100%;
+  margin:0;
+  padding-left:5px;
 }
 .footer {
   height:80px;
   position: absolute;
   bottom:0;
-  left:5px;
+  left:0;
+  padding-left:5px;
+  margin:0;
   width:100%;
 }
 .control-buttons {
@@ -38,7 +52,7 @@ body {
 
 li {
   list-style: none;
-  padding: 15px;
+  padding: 10px;
   border-bottom: #eee solid 1px;
 }
 form {
