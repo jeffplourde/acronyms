@@ -1,10 +1,12 @@
 Acronyms = new Meteor.Collection("acronyms");
 
 if (Meteor.isClient) {
+  Meteor.subscribe("acronyms");
   Template.body.helpers({
     acronyms: function () {
       if(Session.get("prefix")) {
-        return Acronyms.find({active:true, "acronym": new RegExp("^"+Session.get("prefix"), 'i')}, {sort: {acronym: 1}});
+        var prefixRegex = new RegExp(Session.get("prefix"), 'i');
+        return Acronyms.find({active:true, $or: [{"acronym": prefixRegex}, {"meaning": prefixRegex}]}, {sort: {acronym: 1}});
       } else {
         return Acronyms.find({active:true}, {sort: {acronym: 1}});
       }
@@ -15,10 +17,10 @@ if (Meteor.isClient) {
   };
   Template.acronym.helpers({
     editing: function() {
-      return Template.instance().isEditing;
+      return Meteor.userId() && Template.instance().isEditing;
     },
     unlocked: function() {
-      return !this.locked;
+      return Meteor.userId() && !this.locked;
     },
     hasUrl: function() {
       return this.url && "" != this.url;
@@ -26,46 +28,84 @@ if (Meteor.isClient) {
   });
   Template.acronym.events({
     "click .edit": function(e, t) {
-      Acronyms.update(this._id, {$set: {locked: true}});
+      Meteor.call("lockAcronym", this._id);
       t.isEditing = true;
     },
     "click .unlock": function(e, t) {
-      Acronyms.update(this._id, {$set: {locked: false}});
+      Meteor.call("unlockAcronym", this._id);
     },
     "submit .update-acronym": function(e, t) {
-      var upd = {
-        acronym: e.target.acronym.value,
-        meaning: e.target.meaning.value,
-        url: e.target.url.value,
-        locked: false
-      };
-      Acronyms.update(this._id, {$set: upd});
+      Meteor.call("updateAcronym", this._id, e.target.acronym.value, e.target.meaning.value, e.target.url.value);
       t.isEditing = false;
       return false;
     },
     "click .cancel": function(e, t) {
-      Acronyms.update(this._id, {$set: {locked: false}});
+      Meteor.call("unlockAcronym", this._id);
       t.isEditing = false;
     },
   });
   Template.body.events({
     "submit .new-acronym": function(event) {
       var acronym = event.target.acronym.value;
-      Acronyms.insert({acronym: acronym, active: true, locked: false});
+      Meteor.call("addAcronym", acronym);
       event.target.acronym.value = "";
       return false;
     },
     "click .delete": function() {
-      Acronyms.update(this._id, {$set: {active: false}});
+      Meteor.call("deleteAcronym", this._id);
     },
     "keyup .prefix": function(e) {
       Session.set("prefix", e.target.value);
     }
   });
+  Accounts.ui.config({
+    passwordSignupFields: "USERNAME_ONLY"
+  });
 }
 
 if (Meteor.isServer) {
+  Meteor.publish("acronyms", function() {
+    return Acronyms.find({active:true}, {sort: {acronym: 1}});
+  });
   Meteor.startup(function () {
     // code to run on server at startup
   });
 }
+
+Meteor.methods({
+  addAcronym: function(acronym, meaning, url) {
+    if (!Meteor.userId()) {
+      throw new Meteor.Error("not-authorized");
+    }
+    var data = {
+      acronym: acronym,
+      meaning: meaning,
+      url: url,
+      active: true,
+      locked: false,
+      createdAt: new Date(),
+      owner: Meteor.userId(),
+      username: Meteor.user().username
+    };
+    Acronyms.insert(data);
+  },
+  deleteAcronym: function(id) {
+    Acronyms.update(id, {$set: {active: false}});
+  },
+  updateAcronym: function(id, acronym, meaning, url) {
+    Acronyms.update(id, 
+      {$set: {
+        acronym: acronym,
+        meaning: meaning,
+        url: url,
+        locked: false
+      }}
+    );
+  },
+  lockAcronym: function(id) {
+    Acronyms.update(id, {$set: {locked:true}});
+  },
+  unlockAcronym: function(id) {
+    Acronyms.update(id, {$set: {locked:false}});
+  }
+});

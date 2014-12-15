@@ -3,18 +3,27 @@
 </head>
 
 <body>
-    <header>
+    <div class="header">
+    <header >
       <h1>MD PnP Acronyms</h1>
+      {{> loginButtons}}<br/>
       <i class="glyphicon glyphicon-search"></i>&nbsp;<input type="text" name="prefix" class="prefix" placeholder="Type to search"/>
     </header>
+    </div>
+    <div class="content">
     <ul>
       {{#each acronyms}}
         {{> acronym}}
       {{/each}}
     </ul>
-    <form class="new-acronym">
-      <i class="glyphicon glyphicon-plus"></i>&nbsp;<input type="text" name="acronym" placeholder="Type to add new acronym" size="20"/>
-    </form>
+    </div>
+    <div class="footer">
+      {{#if currentUser}}
+      <form class="new-acronym">
+        <i class="glyphicon glyphicon-plus"></i>&nbsp;<input type="text" name="acronym" placeholder="Type to add new acronym" size="20"/>
+      </form>
+      {{/if}}
+    </div>
 </body>
 
 <template name="acronym">
@@ -48,7 +57,7 @@
           <i class="glyphicon glyphicon-trash"></i>
           </button>
         {{else}}
-          <button type="button" class="unlock" title="Locked. Click to override">
+          <button type="button" class="unlock" title="Locked.{{#if currentUser}}Click to override{{/if}}">
             <i class="glyphicon glyphicon-lock"></i>
           </button>
         {{/if}}

@@ -1,49 +1,39 @@
 /* CSS declarations go here */
 body {
-  margin:5%;
+  height:100%;
+  margin-left:5px;
 }
 
-header {
-}
 
-h1 {
-}
-
-.new-acronym input {
-}
-
-.new-acronym input:focus{
-}
-
-ul {
-  margin: 0;
-  padding: 0;
+.content {
+  margin-bottom:80px;
   overflow:hidden;
   overflow-y:scroll;
-  height:300px;
+  position: absolute;
+  top: 120px;
+  left:5px;
+  height: 80%;
 }
 
-
-li {
-  overflow:hidden;
-}
 .acronym {
   font-weight:bold;
 }
-
-.meaning {
+.header {
+  height:120px;
+  position: absolute;
+  top: 0;
+  left: 5px;
+  width:100%;
 }
-
+.footer {
+  height:80px;
+  position: absolute;
+  bottom:0;
+  left:5px;
+  width:100%;
+}
 .control-buttons {
   float:right;
-}
-
-.unlock {
-}
-.update {
-}
-
-.cancel {
 }
 
 li {
@@ -56,28 +46,12 @@ form {
 }
 input[type="text"] {
   margin-bottom: 0;
-  width:70%;
+  width:350px;
 }
 textarea {
-  width:70%;
+  width: 350px;
 }
 label {
   margin-top:10px;
   margin-bottom:0;
-}
-
-
-@media (max-width: 600px) {
-  li {
-    padding: 12px 15px;
-  }
-
-  .search {
-    width: 150px;
-    clear: both;
-  }
-
-  .new-acronym input {
-    padding-bottom: 5px;
-  }
 }
