@@ -19,44 +19,47 @@
 
 <template name="acronym">
   <li>
-  {{#if unlocked}}
-    <button type="button" class="delete" title="Delete">
-    <i class="glyphicon glyphicon-trash"></i>
-    </button>
-  {{/if}}
-  {{#if editing}}
-     <form class="update-acronym">
-     <button type="submit" class="update" title="Save Changes">
-     <i class="glyphicon glyphicon-ok"></i>
-     </button>
-     <button type="button" class="cancel" title="Discard Changes">
-     <i class="glyphicon glyphicon-remove"></i>
-     </button>
-     <label for="acronym">Acronym</label><br/>
-     <input class="acronym-text" id="acronym" type="text" name="acronym" value="{{acronym}}"/><br/>
-     <label>Meaning</label><br/>
-     <input class="meaning-text" type="text" name="meaning" value="{{meaning}}"/><br/>
-     <label>Web Address</label><br/>
-     <input class="url-text" type="text" name="url" value="{{url}}"/>
-     </form>
-  {{else}}
-     <span class="acronym">{{acronym}}</span>
-     <span class="meaning">
+    {{#if editing}}
+       <form class="update-acronym">
+        <label for="acronym">Acronym</label><br/>
+        <input class="acronym-text" id="acronym" type="text" name="acronym" value="{{acronym}}"/><br/>
+        <label>Meaning</label><br/>
+        <textarea class="meaning-text" rows="3" name="meaning">{{meaning}}</textarea><br/>
+        <label>Web Address</label><br/>
+        <input class="url-text" type="text" name="url" value="{{url}}"/>
+        <div class="control-buttons">
+        <button type="submit" class="update" title="Save Changes">
+          <i class="glyphicon glyphicon-ok"></i>
+        </button>
+        <button type="button" class="cancel" title="Discard Changes">
+          <i class="glyphicon glyphicon-remove"></i>
+        </button>        
+        </div>
+       </form>
+    {{else}}
+      <span class="acronym">{{acronym}}</span>
+
+      <div class="control-buttons">
+        {{#if unlocked}}
+          <button type="button" class="edit" title="Edit">
+            <i class="glyphicon glyphicon-edit"></i>
+          </button>
+            <button type="button" class="delete" title="Delete">
+          <i class="glyphicon glyphicon-trash"></i>
+          </button>
+        {{else}}
+          <button type="button" class="unlock" title="Locked. Click to override">
+            <i class="glyphicon glyphicon-lock"></i>
+          </button>
+        {{/if}}
+      </div>
+      <div class="meaning">
         {{#if hasUrl}}
           <a href="{{url}}" target="_blank">{{meaning}}</a>
         {{else}}
           {{meaning}}
         {{/if}}
-     </span>
-     {{#if unlocked}}
-       <button type="button" class="edit" title="Edit">
-       <i class="glyphicon glyphicon-edit"></i>
-       </button>
-     {{else}}
-       <button type="button" class="unlock" title="Locked. Click to override">
-        <i class="glyphicon glyphicon-lock"></i>
-       </button>
-     {{/if}}
-  {{/if}}
+      </div>      
+    {{/if}}
   </li>
 </template>

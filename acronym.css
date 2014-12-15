@@ -18,38 +18,35 @@ h1 {
 ul {
   margin: 0;
   padding: 0;
-  background: white;
   overflow:hidden;
   overflow-y:scroll;
-  height:200px;
+  height:300px;
 }
 
-.delete {
-  float: right;
-  position: relative;
+
+li {
+  overflow:hidden;
+}
+.acronym {
+  font-weight:bold;
 }
 
-.edit {
-  float: right;
-  position: relative;
+.meaning {
+}
+
+.control-buttons {
+  float:right;
 }
 
 .unlock {
-  float: right;
-  position: relative;
 }
 .update {
-  float: right;
-  position: relative;
 }
 
 .cancel {
-  float: right;
-  position: relative;
 }
 
 li {
-  position: relative;
   list-style: none;
   padding: 15px;
   border-bottom: #eee solid 1px;
@@ -59,10 +56,16 @@ form {
 }
 input[type="text"] {
   margin-bottom: 0;
+  width:70%;
 }
-.acronym {
-  font-weight:bold;
+textarea {
+  width:70%;
 }
+label {
+  margin-top:10px;
+  margin-bottom:0;
+}
+
 
 @media (max-width: 600px) {
   li {
