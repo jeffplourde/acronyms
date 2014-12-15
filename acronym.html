@@ -5,40 +5,38 @@
 <body>
     <header>
       <h1>MD PnP Acronyms</h1>
-      <i class="icon-search"></i>&nbsp;<input type="text" name="prefix" class="prefix" placeholder="Type to search"/>
+      <i class="glyphicon glyphicon-search"></i>&nbsp;<input type="text" name="prefix" class="prefix" placeholder="Type to search"/>
     </header>
     <ul>
       {{#each acronyms}}
         {{> acronym}}
       {{/each}}
-      <li>
-        <form class="new-acronym">
-          <i class="icon-plus"></i>&nbsp;<input type="text" name="acronym" placeholder="Type to add new acronym"/>
-        </form>
-      </li>
     </ul>
+    <form class="new-acronym">
+      <i class="glyphicon glyphicon-plus"></i>&nbsp;<input type="text" name="acronym" placeholder="Type to add new acronym" size="20"/>
+    </form>
 </body>
 
 <template name="acronym">
   <li>
   {{#if unlocked}}
     <button type="button" class="delete" title="Delete">
-    <i class="icon-trash"></i>
+    <i class="glyphicon glyphicon-trash"></i>
     </button>
   {{/if}}
   {{#if editing}}
      <form class="update-acronym">
      <button type="submit" class="update" title="Save Changes">
-     <i class="icon-ok"></i>
+     <i class="glyphicon glyphicon-ok"></i>
      </button>
      <button type="button" class="cancel" title="Discard Changes">
-     <i class="icon-remove"></i>
+     <i class="glyphicon glyphicon-remove"></i>
      </button>
-     <label for="acronym">Acronym</label>
-     <input class="acronym-text" id="acronym" type="text" name="acronym" value="{{acronym}}"/>
-     <label>Meaning</label>
-     <input class="meaning-text" type="text" name="meaning" value="{{meaning}}"/>
-     <label>Web Address</label>
+     <label for="acronym">Acronym</label><br/>
+     <input class="acronym-text" id="acronym" type="text" name="acronym" value="{{acronym}}"/><br/>
+     <label>Meaning</label><br/>
+     <input class="meaning-text" type="text" name="meaning" value="{{meaning}}"/><br/>
+     <label>Web Address</label><br/>
      <input class="url-text" type="text" name="url" value="{{url}}"/>
      </form>
   {{else}}
@@ -52,11 +50,11 @@
      </span>
      {{#if unlocked}}
        <button type="button" class="edit" title="Edit">
-       <i class="icon-edit"></i>
+       <i class="glyphicon glyphicon-edit"></i>
        </button>
      {{else}}
        <button type="button" class="unlock" title="Locked. Click to override">
-        <i class="icon-lock"></i>
+        <i class="glyphicon glyphicon-lock"></i>
        </button>
      {{/if}}
   {{/if}}

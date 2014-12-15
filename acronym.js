@@ -1,4 +1,4 @@
-Acronyms = new Mongo.Collection("acronyms");
+Acronyms = new Meteor.Collection("acronyms");
 
 if (Meteor.isClient) {
   Template.body.helpers({
