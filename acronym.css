@@ -43,10 +43,13 @@ body {
 .control-buttons {
   float:right;
 }
-
+ul {
+  margin: 0;
+  padding: 0 20px 0 20px;
+}
 li {
+  padding: 10px 0 10px 0;
   list-style: none;
-  padding: 10px;
   border-bottom: #eee solid 1px;
 }
 form {
