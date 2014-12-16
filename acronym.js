@@ -1,8 +1,7 @@
 Acronyms = new Meteor.Collection("acronyms");
 
 Router.route('/acronyms', function() {
-  console.log("/acronyms : ", this.request.originalUrl);
-  this.render('acronym');
+
 });
 /*
 Router.route('/', function() {
