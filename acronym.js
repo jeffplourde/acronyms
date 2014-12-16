@@ -1,16 +1,20 @@
 Acronyms = new Meteor.Collection("acronyms");
 
 Router.route('/acronyms', function() {
+  console.log("/acronyms : ", this.request.originalUrl);
   this.render('acronym');
 });
-
+/*
 Router.route('/', function() {
   var req = this.request;
   var res = this.response;
-  res.writeHead(302, {'Location': '/acronyms'});
+  var url = this.request.originalUrl;
+  var newUrl = url.protocol+'//'+url.hostname+'/acronyms';
+  console.log('/ : ', this.request.originalUrl, newUrl);
+  res.writeHead(302, {'Location': newUrl});
   res.end();
 }, {where: 'server'});
-
+*/
 if (Meteor.isClient) {
   Meteor.subscribe("acronyms");
   Template.body.helpers({
