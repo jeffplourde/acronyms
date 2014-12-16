@@ -1,8 +1,5 @@
 Acronyms = new Meteor.Collection("acronyms");
-
-Router.route('/acronyms', function() {
-
-});
+Router.route('/acronyms',function() {});
 /*
 Router.route('/', function() {
   var req = this.request;
@@ -101,13 +98,16 @@ Meteor.methods({
       active: true,
       locked: false,
       createdAt: new Date(),
-      owner: Meteor.userId(),
-      username: Meteor.user().username
+      createdBy: Meteor.userId()
     };
     Acronyms.insert(data);
   },
   deleteAcronym: function(id) {
-    Acronyms.update(id, {$set: {active: false}});
+    Acronyms.update(id, {$set: {
+      active: false,
+      deletedAt: new Date(),
+      deletedBy: Meteor.userId()
+    }});
   },
   updateAcronym: function(id, acronym, meaning, url) {
     Acronyms.update(id, 
@@ -115,7 +115,9 @@ Meteor.methods({
         acronym: acronym,
         meaning: meaning,
         url: url,
-        locked: false
+        locked: false,
+        updatedAt: new Date(),
+        updatedBy: Meteor.userId()
       }}
     );
   },
